@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"noImplicitAny": true,
+		"module": "ESNext",
+		"target": "es5",
+		"jsx": "react",
+		"allowJs": true,
+		"moduleResolution": "node",
+
+		"allowSyntheticDefaultImports": true,
+		// ⬆ если какая-то библиотека не имеет default import,
+		// лоадеры вроде ts loader или babel-loader автоматически создают их
+		// вместо такого импорта
+		// import * as Money from'money';
+		// можно писать такой
+		// import Money from'money';
+		"esModuleInterop": true
+		// ⬆ Позволяет работать с пакетами, которые используют common js
+		// как с обычными пакетами с помощью import (require() module.exports) = common js
+		// import Money from'money';
+		// без флага esModuleInterop не будет работать, результат = undefined
+		// с флагом esModuleInterop будет работать, результат = [object Object]
+	},
+	"ts-node": {
+		"compilerOptions": {
+			"module": "CommonJS"
+		}
+	}
+}
