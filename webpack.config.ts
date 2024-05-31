@@ -1,8 +1,8 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 import webpack from 'webpack';
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
-const devServer: DevServerConfiguration = {};
 
 type Mode = 'development' | 'production';
 
@@ -30,6 +30,11 @@ export default (env: EnvVariables) => {
 			// This plugin provides a visual progress bar during the build process, which can be helpful for monitoring the progress and ensuring that the build is running smoothly.
 			// It is not recommended to use in the production assembly, because he slows it down.
 			isDev ? new webpack.ProgressPlugin() : undefined,
+			!isDev &&
+				new MiniCssExtractPlugin({
+					filename: 'css/[name].[contenthash].css',
+					chunkFilename: 'css/[id].[contenthash].css',
+				}),
 		],
 		module: {
 			rules: [
@@ -38,7 +43,7 @@ export default (env: EnvVariables) => {
 					test: /\.s[ac]ss$/i,
 					use: [
 						// Creates `style` nodes from JS strings
-						'style-loader',
+						isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 						// Translates CSS into CommonJS
 						'css-loader',
 						// Compiles Sass to CSS
@@ -59,10 +64,10 @@ export default (env: EnvVariables) => {
 		},
 		devtool: isDev ? 'inline-source-map' : false,
 		devServer: isDev
-			? {
+			? ({
 					port: env.port ?? 8080,
 					open: true,
-			  }
+			  } as DevServerConfiguration)
 			: undefined,
 	};
 	return config;
