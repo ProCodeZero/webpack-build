@@ -16,8 +16,7 @@ export default (env: EnvVariables) => {
 
 	const config: webpack.Configuration = {
 		mode: env.mode ?? 'development',
-		entry: path.resolve(__dirname, './src/index.ts'),
-
+		entry: path.resolve(__dirname, './src/index.tsx'),
 		output: {
 			path: path.resolve(__dirname, 'build'),
 			filename: '[name].[contenthash].js',
@@ -34,6 +33,18 @@ export default (env: EnvVariables) => {
 		],
 		module: {
 			rules: [
+				//! Порядок имеет значение!
+				{
+					test: /\.s[ac]ss$/i,
+					use: [
+						// Creates `style` nodes from JS strings
+						'style-loader',
+						// Translates CSS into CommonJS
+						'css-loader',
+						// Compiles Sass to CSS
+						'sass-loader',
+					],
+				},
 				{
 					// ts-loader умеет работать с JSX
 					// Если бы я не использовал Typescript, нужно было бы использовать babel-loader
