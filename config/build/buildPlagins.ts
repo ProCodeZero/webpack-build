@@ -1,3 +1,4 @@
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack, { Configuration, DefinePlugin } from 'webpack';
@@ -14,6 +15,8 @@ export function buildPlagins({ mode, paths, analyzer, platform }: BuildOptions):
 		new DefinePlugin({
 			__PLATFORM__: JSON.stringify(platform),
 		}),
+		// Выносит проверку типов в отдельный процесс, не нагружая сборку
+		new ForkTsCheckerWebpackPlugin(),
 	];
 
 	if (isDev) {
