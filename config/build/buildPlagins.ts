@@ -1,9 +1,10 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack, { Configuration } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { BuildOptions } from './interfaces/buildInterfaces';
 
-export function buildPlagins({ mode, paths }: BuildOptions): Configuration['plugins'] {
+export function buildPlagins({ mode, paths, analyzer }: BuildOptions): Configuration['plugins'] {
 	const isDev = mode === 'development';
 
 	const plugins: Configuration['plugins'] = [
@@ -23,6 +24,10 @@ export function buildPlagins({ mode, paths }: BuildOptions): Configuration['plug
 				chunkFilename: 'css/[id].[contenthash].css',
 			})
 		);
+	}
+
+	if (analyzer) {
+		plugins.push(new BundleAnalyzerPlugin());
 	}
 
 	return plugins;
