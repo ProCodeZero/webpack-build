@@ -1,4 +1,5 @@
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -32,6 +33,9 @@ export function buildPlagins({ mode, paths, analyzer, platform }: BuildOptions):
 			new MiniCssExtractPlugin({
 				filename: 'css/[name].[contenthash].css',
 				chunkFilename: 'css/[id].[contenthash].css',
+			}),
+			new CopyPlugin({
+				patterns: [{ from: path.resolve(paths.public, 'locales'), to: path.resolve(paths.output, 'locales') }],
 			})
 		);
 	}
