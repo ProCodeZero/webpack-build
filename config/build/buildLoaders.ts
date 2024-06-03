@@ -55,6 +55,14 @@ export function buildLoaders({ mode }: BuildOptions): ModuleOptions['rules'] {
 		],
 	};
 
+	const babelLoader = {
+		test: /\.tsx?$/,
+		exclude: /node_modules/,
+		use: {
+			loader: 'babel-loader',
+		},
+	};
+
 	const tsLoader = {
 		exclude: /node_modules/,
 		test: /\.tsx?$/,
@@ -75,7 +83,8 @@ export function buildLoaders({ mode }: BuildOptions): ModuleOptions['rules'] {
 		//! Порядок имеет значение!
 		assetLoader,
 		scssLoader,
-		tsLoader,
+		babelLoader,
+		// tsLoader,
 		svgrLoader,
 	];
 }
