@@ -18,6 +18,8 @@ const App = () => {
 		setCount(count + 1);
 	};
 
+	// Пример использования глобальной переменной для отображения нужной части приложения
+
 	// if (__PLATFORM__ === 'desktop') {
 	// 	return <div>IsDeskpot</div>;
 	// }

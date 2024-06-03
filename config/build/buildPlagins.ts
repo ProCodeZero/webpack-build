@@ -2,6 +2,7 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
 import webpack, { Configuration, DefinePlugin } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { BuildOptions } from './interfaces/buildInterfaces';
@@ -12,6 +13,7 @@ export function buildPlagins({ mode, paths, analyzer, platform }: BuildOptions):
 	const plugins: Configuration['plugins'] = [
 		new HtmlWebpackPlugin({
 			template: paths.html,
+			favicon: path.resolve(paths.public, 'favicon.ico'),
 		}),
 		new DefinePlugin({
 			__PLATFORM__: JSON.stringify(platform),
