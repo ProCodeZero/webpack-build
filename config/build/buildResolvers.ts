@@ -4,5 +4,8 @@ import { BuildOptions } from './interfaces/buildInterfaces';
 export function builtResolvers(options: BuildOptions): Configuration['resolve'] {
 	return {
 		extensions: ['.tsx', '.ts', '.js'],
+		alias: {
+			'@': options.paths.src,
+		},
 	};
 }

@@ -1,7 +1,7 @@
+import App from '@/components/App';
 import { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import App from './components/App';
 import { LazyAbout } from './pages/About/About.lazy';
 import { LazyShop } from './pages/Shop/Shop.lazy';
 

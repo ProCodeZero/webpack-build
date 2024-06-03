@@ -15,12 +15,16 @@
 		// import * as Money from'money';
 		// можно писать такой
 		// import Money from'money';
-		"esModuleInterop": true
+		"esModuleInterop": true,
 		// ⬆ Позволяет работать с пакетами, которые используют common js
 		// как с обычными пакетами с помощью import (require() module.exports) = common js
 		// import Money from'money';
 		// без флага esModuleInterop не будет работать, результат = undefined
 		// с флагом esModuleInterop будет работать, результат = [object Object]
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
 	},
 	"ts-node": {
 		"compilerOptions": {
