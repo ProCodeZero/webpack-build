@@ -5,6 +5,12 @@ import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import * as styles from './App.module.scss';
 
+// TREE SHAKING - оптимизация приложения за счет исключения неиспользуемых частей приложения
+// таких как функция ниже, она в сборку не попадает, т.к. она не используется
+const TODO = function () {
+	console.log('TODOFUNCTION');
+};
+
 const App = () => {
 	const [count, setCount] = useState(0);
 
@@ -12,9 +18,18 @@ const App = () => {
 		setCount(count + 1);
 	};
 
+	if (__PLATFORM__ === 'desktop') {
+		return <div>IsDeskpot</div>;
+	}
+
+	if (__PLATFORM__ === 'mobile') {
+		return <div>IsMobile</div>;
+	}
+
 	return (
 		<>
 			<div>
+				<h1>PLATFORM: {__PLATFORM__}</h1>
 				<h1>{count}</h1>
 				<button className={styles.btn} onClick={increment}>
 					Increment
